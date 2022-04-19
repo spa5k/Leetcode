@@ -1,15 +1,16 @@
-class Solution:
-    def asteroidCollision(self, asteroids: List[int]) -> List[int]:
-        s = []
-        for a in asteroids:
-            while s and s[-1] > 0 and a < 0:
-                if s[-1] + a < 0:
-                    s.pop()
-                elif s[-1] + a > 0:
+class Solution(object):
+    def asteroidCollision(self, asteroids):
+        res = []
+        for asteroid in asteroids:
+            while len(res) and asteroid < 0 and res[-1] > 0:
+                if res[-1] == -asteroid:
+                    res.pop()
                     break
-                else:
-                    s.pop()
+                elif res[-1] < -asteroid:
+                    res.pop()
+                    continue
+                elif res[-1] > -asteroid:
                     break
             else:
-                s.append(a)
-        return s
+                res.append(asteroid)
+        return res
