@@ -4,7 +4,6 @@ class Solution:
 
         for i, val in enumerate(score):
             heapq.heappush(ranks, (-val, i))
-        print(ranks)
         res = [0] * len(score)
         r = 1
         rank = ["Gold Medal", "Silver Medal", "Bronze Medal"]
