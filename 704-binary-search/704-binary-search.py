@@ -9,7 +9,6 @@ class Solution:
                 return m
             if nums[m] > target:
                 r = m - 1
-                continue
-            if nums[m] < target:
+            elif nums[m] < target:
                 l = m + 1
         return -1
