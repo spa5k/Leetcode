@@ -15,5 +15,7 @@ class Solution:
         for i in range(left, len(nums)):
             if nums[i] == target:
                 res.append(i)
+            else:
+                break
 
         return res
