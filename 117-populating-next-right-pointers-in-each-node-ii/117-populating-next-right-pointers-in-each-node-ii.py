@@ -18,7 +18,7 @@ class Solution:
         while q:
             for i in range(1, len(q)):
                 q[i-1].next = q[i]
-            q[-1].next = None
+            # q[-1].next = None
             new_level = collections.deque()
             for node in q:
                 if node.left:
