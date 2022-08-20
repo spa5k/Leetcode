@@ -9,19 +9,41 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution
-{
-public:
-  bool findTarget(TreeNode *root, int k)
-  {
-    if (!root)
-      return false;
-    if (s.count(k - root->val))
-      return true;
-    s.insert(root->val);
-    return findTarget(root->left, k) || findTarget(root->right, k);
-  }
+	class Solution {
+	public:
+		bool findTarget(TreeNode* root, int k) {
 
-private:
-  unordered_set<int> s;
+		vector<int>traversal;
+		inorderTraversal(root, traversal);
+
+		//we will create two pointer
+		int left = 0;
+		int right = traversal.size()-1;
+
+		while(left < right)
+		{
+			if(traversal[left] + traversal[right] == k)
+				return true;
+
+			else if(traversal[left] + traversal[right] > k)
+				right--;
+
+			else
+				left++;
+
+		}
+
+		return false;
+	}
+
+	void inorderTraversal(TreeNode* root, vector<int>&traversal)
+	{
+		if(root == NULL)
+			return;
+
+		inorderTraversal(root->left, traversal);
+		traversal.push_back(root->val);
+		inorderTraversal(root->right, traversal);
+
+	}
 };
