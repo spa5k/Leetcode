@@ -25,10 +25,10 @@ public:
     }
     int mid = (left + right) / 2;
     TreeNode *temp = new TreeNode(nums[mid]);
+    temp->right = helper(nums, mid + 1, right);
 
     temp->left = helper(nums, left, mid - 1);
 
-    temp->right = helper(nums, mid + 1, right);
     return temp;
   }
 };
