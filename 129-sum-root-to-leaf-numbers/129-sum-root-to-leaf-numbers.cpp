@@ -11,27 +11,31 @@
  */
 class Solution
 {
+public:
+  int res = 0;
 
 public:
   int sumNumbers(TreeNode *root)
   {
-    return helper(root, 0);
+    helper(root, res);
+    cout << res;
+    return res;
   }
-  int helper(TreeNode *node, int curr)
+  void helper(TreeNode *node, int curr)
   {
     if (!node)
-      return 0;
+      return;
 
     curr = curr * 10 + node->val;
-
-    if (node->left == nullptr && node->right == nullptr)
+    if (!node->left && !node->right)
     {
-      return curr;
+      // This is
+      res += curr;
+      return;
     }
 
-    int left = helper(node->left, curr);
+    helper(node->left, curr);
 
-    int right = helper(node->right, curr);
-    return right + left;
+    helper(node->right, curr);
   }
 };
