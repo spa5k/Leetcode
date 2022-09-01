@@ -18,13 +18,33 @@ public:
     {
       return new TreeNode(val);
     }
-    if (val < root->val)
+    TreeNode *current = root;
+    while (true)
     {
-      root->left = insertIntoBST(root->left, val);
-    }
-    else
-    {
-      root->right = insertIntoBST(root->right, val);
+      if (current->val <= val)
+      {
+        if (current->right != nullptr)
+        {
+          current = current->right;
+        }
+        else
+        {
+          current->right = new TreeNode(val);
+          break;
+        }
+      }
+      else
+      {
+        if (current->left != nullptr)
+        {
+          current = current->left;
+        }
+        else
+        {
+          current->left = new TreeNode(val);
+          break;
+        }
+      }
     }
 
     return root;
