@@ -22,7 +22,7 @@ public:
     {
       root->left = insertIntoBST(root->left, val);
     }
-    else if (root->val < val)
+    else
     {
       root->right = insertIntoBST(root->right, val);
     }
