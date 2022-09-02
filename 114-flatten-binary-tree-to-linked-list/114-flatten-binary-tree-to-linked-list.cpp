@@ -14,29 +14,21 @@ class Solution
 public:
   void flatten(TreeNode *root)
   {
-    dfs(root);
-  }
-  TreeNode *dfs(TreeNode *root)
-  {
-    if (root == nullptr)
-      return nullptr;
-    TreeNode *leftTail = dfs(root->left);
-    TreeNode *rightTail = dfs(root->right);
-
-    if (root->left != nullptr)
+    TreeNode *curr = root;
+    while (curr)
     {
-      leftTail->right = root->right;
-      root->right = root->left;
-      root->left = nullptr;
+      if (curr->left)
+      {
+        TreeNode *lastRight = curr->left;
+        while (lastRight->right != nullptr)
+        {
+          lastRight = lastRight->right;
+        }
+        lastRight->right = curr->right;
+        curr->right = curr->left;
+        curr->left = nullptr;
+      }
+      curr = curr->right;
     }
-    if (rightTail)
-    {
-      return rightTail;
-    }
-    if (leftTail)
-    {
-      return leftTail;
-    }
-    return root;
   }
 };
