@@ -22,11 +22,11 @@ public:
     {
       return nullptr;
     }
-   if (node->neighbors.size() == 0)
-    {
-      Node *clone = new Node(node->val);
-      return clone;
-    }
+    // if (node->neighbors.size() == 0)
+    // {
+    //   Node *clone = new Node(node->val);
+    //   return clone;
+    // }
     return cloner(node, mp);
   }
 };
