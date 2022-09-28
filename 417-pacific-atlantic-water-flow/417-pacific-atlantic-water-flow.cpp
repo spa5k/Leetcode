@@ -3,15 +3,15 @@ class Solution
 public:
   vector<vector<int>> pacificAtlantic(vector<vector<int>> &heights)
   {
-int m = heights.size();
-        int n = heights[0].size();
+    int m = heights.size();
+    int n = heights[0].size();
     vector<vector<bool>> pacific(m, vector<bool>(n));
     vector<vector<bool>> atlantic(m, vector<bool>(n));
 
     for (int i = 0; i < m; i++)
     {
       dfs(i, 0, heights, pacific);
-      dfs(i, n - 1, heights, atlantic );
+      dfs(i, n - 1, heights, atlantic);
     }
 
     for (int j = 0; j < n; j++)
