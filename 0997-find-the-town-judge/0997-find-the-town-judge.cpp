@@ -1,4 +1,3 @@
-
 class Solution
 {
 public:
@@ -9,15 +8,14 @@ public:
       return 1;
     }
     vector<int> out(n + 1, 0);
-    vector<int> in(n + 1, 0);
     for (auto &&edge : trust)
     {
-      out[edge[0]]++;
-      in[edge[1]]++;
+      out[edge[0]]--;
+      out[edge[1]]++;
     }
     for (int i = 0; i <= n; i++)
     {
-      if (out[i] == 0 && in[i] == n - 1)
+      if (out[i] == n - 1)
       {
         return i;
       }
