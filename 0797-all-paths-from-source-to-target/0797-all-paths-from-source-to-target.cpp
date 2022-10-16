@@ -1,22 +1,29 @@
 class Solution
 {
 public:
-  void dfs(vector<vector<int>> &g, vector<vector<int>> &res, vector<int> &path, int cur)
+  int target;
+  vector<vector<int>> res;
+  vector<int> temp;
+  vector<vector<int>> allPathsSourceTarget(vector<vector<int>> &graph)
   {
-    path.push_back(cur);
-    if (cur == g.size() - 1)
-      res.push_back(path);
-    else
-      for (auto it : g[cur])
-        dfs(g, res, path, it);
-    path.pop_back();
+    target = graph.size() - 1;
+    dfs(graph);
+    return res;
   }
-
-  vector<vector<int>> allPathsSourceTarget(vector<vector<int>> &g)
+  void dfs(vector<vector<int>> &graph, int currentNode = 0)
   {
-    vector<vector<int>> paths;
-    vector<int> path;
-    dfs(g, paths, path, 0);
-    return paths;
+    temp.push_back(currentNode);
+    if (currentNode == target)
+    {
+      res.push_back(temp);
+    }
+    else
+    {
+      for (int node : graph[currentNode])
+      {
+        dfs(graph, node);
+      }
+    }
+    temp.pop_back();
   }
 };
