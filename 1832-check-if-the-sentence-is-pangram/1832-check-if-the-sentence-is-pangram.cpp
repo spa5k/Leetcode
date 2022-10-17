@@ -3,11 +3,16 @@ class Solution
 public:
   bool checkIfPangram(string sentence)
   {
-    set<int> s;
-    for (auto &letter : sentence)
+    vector<bool> freq(26, false);
+
+    for (auto ch : sentence)
+      freq[ch - 'a'] = true;
+
+    for (auto it : freq)
     {
-      s.insert(letter);
+      if (it == false)
+        return false;
     }
-    return s.size() == 26;
+    return true;
   }
 };
