@@ -3,39 +3,39 @@ class Solution
 public:
   int longestPalindrome(vector<string> &words)
   {
-    unordered_map<string, int> m;
-    int unpaired = 0, ans = 0;
+    unordered_map<string, int> map;
+    int counter = 0;
+
     for (string w : words)
     {
-      if (w[0] == w[1])
+      string rev = w;
+      reverse(w.begin(), w.end());
+      if (map[w])
       {
-        if (m[w] > 0)
-        {
-          unpaired--;
-          m[w]--;
-          ans += 4;
-        }
-        else
-        {
-          m[w]++;
-          unpaired++;
-        }
+        map[w]--;
+        counter += 4;
       }
       else
       {
-        string rev = w;
-        reverse(rev.begin(), rev.end());
-        if (m[rev] > 0)
-        {
-          ans += 4;
-          m[rev]--;
-        }
-        else
-          m[w]++;
+        map[rev] += 1;
       }
     }
-    if (unpaired > 0)
-      ans += 2;
-    return ans;
+    vector<string> moreWords{};
+    for (auto &&i : map)
+    {
+      string first = i.first;
+      string rev = first;
+      reverse(first.begin(), first.end());
+      if (map[first] && rev == first)
+      {
+        moreWords.push_back(first);
+      }
+    }
+    if (moreWords.size() > 0)
+    {
+      counter += 2;
+    }
+
+    return counter;
   }
 };
