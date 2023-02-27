@@ -3,19 +3,19 @@ class Solution
 public:
   bool isAnagram(string s, string t)
   {
-    unordered_map<char, int> mp{};
+    if (s == t)
+      return true;
     if (s.size() != t.size())
-    {
       return false;
-    }
-    for (auto &&key : s)
+    int mp[26] = {};
+    for (int i = 0; i < s.size(); i++)
     {
-      mp[key]++;
+      mp[s[i] - 'a']++;
+      mp[t[i] - 'a']--;
     }
-    for (auto &&key : t)
+    for (auto &&i : mp)
     {
-      mp[key]--;
-      if (mp[key] < 0)
+      if (i)
         return false;
     }
 
