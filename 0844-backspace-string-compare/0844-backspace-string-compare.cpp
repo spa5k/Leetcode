@@ -40,9 +40,7 @@ public:
         {
             return false;
         }
-
-        int index = 0;
-        while (index < s1.size())
+        while (!s1.empty())
         {
             char t1 = s1.top();
             s1.pop();
