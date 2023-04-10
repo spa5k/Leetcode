@@ -12,10 +12,10 @@ class Solution
 public:
     int guessNumber(int n)
     {
-        int start = 1, end = n;
+        int start = 1, end = n,mid;
         while (start <= end)
         {
-            int mid = start + (end - start) / 2;
+            mid = start + (end - start) / 2;
             int pos = guess(mid);
             if (pos == 0)
                 return mid;
