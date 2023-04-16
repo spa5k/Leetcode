@@ -3,28 +3,39 @@ class Solution
 public:
     int maxNumberOfBalloons(string text)
     {
-        int a = 0;
-        int b = 0;
-        int l = 0;
-        int o = 0;
-        int n = 0;
+        int bCount = 0, aCount = 0, lCount = 0, oCount = 0, nCount = 0;
 
-        for (auto &&i : text)
+        // Count the frequencey of all the five characters
+        for (int i = 0; i < text.length(); i++)
         {
-            if (i == 'b')
-                b++;
-            if (i == 'a')
-                a++;
-            if (i == 'l')
-                l++;
-            if (i == 'o')
-                o++;
-            if (i == 'n')
-                n++;
+            if (text[i] == 'b')
+            {
+                bCount++;
+            }
+            else if (text[i] == 'a')
+            {
+                aCount++;
+            }
+            else if (text[i] == 'l')
+            {
+                lCount++;
+            }
+            else if (text[i] == 'o')
+            {
+                oCount++;
+            }
+            else if (text[i] == 'n')
+            {
+                nCount++;
+            }
         }
-        l /= 2;
-        o /= 2;
 
-        return min(b, min(a, min(l, min(o, n))));
+        // Find the potential of each character.
+        // Except for 'l' and 'o' the potential is equal to the frequency.
+        lCount = lCount / 2;
+        oCount = oCount / 2;
+
+        // Find the bottleneck.
+        return min({bCount, aCount, lCount, oCount, nCount});
     }
 };
