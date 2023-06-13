@@ -5,14 +5,13 @@
  */
 var twoSum = function (nums, target) {
   const map = {};
-  for (let index = 0; index < nums.length; index++) {
-    const element = nums[index];
-    const needed = target - element;
-
-    if (map[needed] !== undefined) {
-      return [map[needed], index];
+  for (let i = 0; i < nums.length; i++) {
+    const num = nums[i];
+    const neededNumber = target - num;
+    if (map[neededNumber] !== undefined) {
+      return [map[neededNumber], i];
     }
-    map[element] = index;
+    map[num] = i;
   }
   return [];
 };
