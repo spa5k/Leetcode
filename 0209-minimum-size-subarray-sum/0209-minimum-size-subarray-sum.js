@@ -3,8 +3,8 @@
  * @param {number[]} nums
  * @return {number}
  */
-var minSubArrayLen = function(target, nums) {
-    let minLength = Infinity; // Initialize the minimum length as infinity
+var minSubArrayLen = function (target, nums) {
+  let minLength = Infinity; // Initialize the minimum length as infinity
   let sum = 0; // Initialize the current sum
   let left = 0; // Left pointer of the sliding window
 
@@ -21,4 +21,3 @@ var minSubArrayLen = function(target, nums) {
 
   return minLength === Infinity ? 0 : minLength;
 };
-
