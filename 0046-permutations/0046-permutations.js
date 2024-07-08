@@ -5,7 +5,8 @@
 var permute = function(nums) {
     const res=[]
     const state =[]
-    function dfs(start, used) {
+    const used = new Array(nums.length).fill(false);
+    function dfs(start) {
         if (start===nums.length) {
             res.push([...state]);
             return;
@@ -21,6 +22,6 @@ var permute = function(nums) {
          }
     }
     
-    dfs(0, new Array(nums.length).fill(false)) 
+    dfs(0, ) 
     return res;
 };
