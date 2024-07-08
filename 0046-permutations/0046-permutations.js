@@ -16,7 +16,7 @@ var permute = function(nums) {
              if (used[i]) continue;
              state.push(nums[i])
              used[i]=true;
-             dfs(start+1, used);
+             dfs(start+1);
              state.pop();
              used[i]=false;
          }
