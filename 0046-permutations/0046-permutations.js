@@ -4,28 +4,23 @@
  */
 var permute = function(nums) {
     const res=[]
-    const state=[];
-    const used = new Array(nums.length).fill(false)
-    
-    function dfs() {
-        if (state.length === nums.length) {
+    const state =[]
+    function dfs(start, used) {
+        if (start===nums.length) {
             res.push([...state]);
             return;
         }
         
-        for (let i=0;i<nums.length;i++) {
-            if (used[i]) continue;
-            
-            state.push(nums[i])
-            used[i]= true;
-            dfs();
-            
-            state.pop();
-            used[i]=false;
-            
-        }
-        
+         for (let i = 0; i < nums.length; i++) {
+             if (used[i]) continue;
+             state.push(nums[i])
+             used[i]=true;
+             dfs(start+1, used);
+             state.pop();
+             used[i]=false;
+         }
     }
-    dfs();
+    
+    dfs(0, new Array(nums.length).fill(false)) 
     return res;
 };
