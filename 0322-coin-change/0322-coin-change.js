@@ -1,27 +1,25 @@
-function coinChange(coins, amount) {
-    let result = Number.MAX_SAFE_INTEGER;
-    const memo = [];
-
-    function dfs(index, sum, count) {
-        if (sum > amount) {
-            return;
-        }
-        if (sum === amount) {
-            result = Math.min(result, count);
-            return;
-        }
-
-        for (let i = index; i < coins.length; i++) {
-            const newSum = sum + coins[i];
-            const newCount = count + 1;
-
-            if (!memo[newSum] || newCount < memo[newSum]) {
-                memo[newSum] = newCount;
-                dfs(i, sum + coins[i], count + 1);
-            }
-        }
+function minCoins(coins, amount, sum, memo) {
+  if (sum === amount) {
+    return 0;
+  }
+  if (sum > amount) {
+    return Infinity;
+  }
+  if (memo[sum] != -1) {
+    return memo[sum];
+  }
+  let ans = Infinity;
+  for (let coin of coins) {
+    let result = minCoins(coins, amount, sum + coin, memo);
+    if (result === Infinity) {
+      continue;
     }
-
-    dfs(0, 0, 0);
-    return result === Number.MAX_SAFE_INTEGER ? -1 : result;
+    ans = Math.min(ans, result + 1);
+  }
+  return memo[sum] = ans;
+}
+function coinChange(coins, amount) {
+  let memo = new Array(amount + 1).fill(-1);
+  let result = minCoins(coins, amount, 0, memo);
+  return result === Infinity ? -1 : result;
 }
