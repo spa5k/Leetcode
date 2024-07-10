@@ -4,25 +4,21 @@
  * @return {number[][]}
  */
 var combinationSum = function (candidates, target) {
-    const result = [];
-    const state = [];
-
-    function dfs(start, sum) {
-        if (sum === target) {
-            result.push([...state]);
+     function dfs(nums, start, remaining, path) {
+        if (remaining == 0) {
+            res.push([...path]);
             return;
         }
-
-        if (sum > target) {
-            return;
-        }
-
-        for (let i = start; i < candidates.length; i++) {
-            state.push(candidates[i]);
-            dfs(i, sum+candidates[i]);
-            state.pop();
+        for (let i = start; i < nums.length; i++) {
+            const num = nums[i];
+            if (remaining - num < 0) continue;
+            path.push(num);
+            dfs(nums, i, remaining - num, path);
+            path.pop();
         }
     }
-    dfs(0,0);
-    return result;
+    candidates.sort();
+    res = [];
+    dfs(candidates, 0, target, []);
+    return res;
 };
