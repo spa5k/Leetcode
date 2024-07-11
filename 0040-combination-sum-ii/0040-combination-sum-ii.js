@@ -1,17 +1,17 @@
 var combinationSum2 = function (candidates, target) {
     const result = [];
     const state = [];
-    const memo = new Set();
-
-    candidates.sort((a, b) => a - b);
+    const memo = {};
+    candidates.sort();
 
     function dfs(start, sum) {
-        if (sum === target) {
-            const combination = state.slice().join(',');
-            if (!memo.has(combination)) {
-                result.push([...state]);
-                memo.add(combination);
-            }
+        if (sum === target && !memo[state.join('')]) {
+            result.push([...state]);
+            memo[state.join('')] = true;
+
+            return;
+        }
+        if (memo[state.join('')]) {
             return;
         }
 
@@ -23,12 +23,12 @@ var combinationSum2 = function (candidates, target) {
             if (i > start && candidates[i] === candidates[i - 1]) {
                 continue;
             }
+            
             state.push(candidates[i]);
             dfs(i + 1, sum + candidates[i]);
             state.pop();
         }
     }
-
     dfs(0, 0);
     return result;
 };
