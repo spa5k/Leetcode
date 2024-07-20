@@ -2,12 +2,13 @@
  * @param {number[][]} triangle
  * @return {number}
  */
-var minimumTotal = function(triangle) {
+var minimumTotal = function (triangle) {
     const n = triangle.length;
 
-    const memo = Array(n)
-        .fill()
-        .map(() => Array(n).fill(Number.MAX_SAFE_INTEGER));
+    const memo = Array(n);
+    for (let i = 0; i < n; i++) {
+        memo[i] = Array(n).fill(Number.MAX_SAFE_INTEGER);
+    }
 
     function dfs(level, column) {
         if (level === n) return 0;
@@ -21,5 +22,4 @@ var minimumTotal = function(triangle) {
         return memo[level][column];
     }
     return dfs(0, 0);
-     
 };
