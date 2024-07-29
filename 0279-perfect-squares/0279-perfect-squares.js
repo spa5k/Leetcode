@@ -3,13 +3,25 @@
  * @return {number}
  */
 var numSquares = function (n) {
-    const dp = new Array(n + 1).fill(Number.MAX_SAFE_INTEGER);
-    dp[0] = 0;
-    for (let i = 1; i * i <= n; i++) {
-        let cur = i * i;
-        for (let j = cur; j <= n; j++) {
-            dp[j] = Math.min(dp[j], dp[j - cur] + 1);
+    const memo = new Array(n + 1).fill(-1);
+    const isPerfectSquare = (x) => {
+        const sqrt = Math.sqrt(x);
+        return sqrt === Math.floor(sqrt);
+    };
+
+    const helper = (n) => {
+        if (n <= 0) return 0;
+        if (isPerfectSquare(n)) return 1;
+        if (memo[n] !== -1) return memo[n];
+
+        let minSquares = n;
+        for (let i = 1; i * i <= n; i++) {
+            minSquares = Math.min(minSquares, 1 + helper(n - i * i));
         }
-    }
-    return dp[n];
+
+        memo[n] = minSquares;
+        return minSquares;
+    };
+
+    return helper(n);
 };
