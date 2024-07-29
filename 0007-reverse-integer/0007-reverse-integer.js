@@ -11,7 +11,7 @@ var reverse = function (x) {
     }
 
     const str = parseInt(strArray.reverse().join(''));
-        if (str > Math.pow(2, 31)) return 0;
+    if (str > Math.pow(2, 31)) return 0;
 
     if (sign === '-') {
         return -str;
